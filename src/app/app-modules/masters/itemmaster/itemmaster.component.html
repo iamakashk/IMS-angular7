@@ -1,0 +1,307 @@
+<section class="content">
+  <div class="box-header with-border box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Item Master</h3>
+    </div>
+    <form [formGroup]="itemMasterForm">
+      <div class="form-group col-md-4">
+        <label>Item Code</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          formControlName="itItemCode"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Item Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          formControlName="itItemName"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Product Code</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          formControlName="itProdCode"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Group</label>
+        <select class="form-control" formControlName="itGroupCode">
+          <option *ngFor="let groupCode of GroupCode" [value]="groupCode">{{
+            groupCode
+          }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Subgroup</label>
+        <select class="form-control" formControlName="itSubGroupCode">
+          <option *ngFor="let subgroup of SubGroupCode" [value]="subgroup">{{
+            subgroup
+          }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>HSN</label>
+        <select class="form-control" formControlName="itTariffCode">
+          <option *ngFor="let teriffCode of TariffCode" [value]="teriffCode">{{
+            teriffCode
+          }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>1 Day</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="1 Day"
+          formControlName="itRate1Day"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>2 Day</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Contact Person"
+          formControlName="itRate2Days"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>3 Day</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Telephone 1"
+          formControlName="itRate3Days"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>1 Week</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="itRate1Week"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>15 Days</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Contact Person"
+          formControlName="itRate15Days"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>1 Month</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Telephone 1"
+          formControlName="itRate1Month"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>3 Month</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="itRate3Months"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>6 Month</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="itRate6Months"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>9 Month</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Contact Person"
+          formControlName="itRate9Months"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>12 Month</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Telephone 1"
+          formControlName="itRate12Months"
+        />
+      </div>
+    </form>
+
+    <div class="box-footer col-md-12" style="display:flex;">
+      <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-primary ml-4"
+          (click)="onSubmit('ADD')"
+        >
+          ADD ITEM
+        </button>
+      </div>
+      <!-- <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="_addEnquiryClickHandler('UPDATE')"
+          [disabled]="!_isModifiedClicked"
+        >
+          MODIFY
+        </button>
+      </div> -->
+      <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-info"
+          (click)="resetFormClickHandler()"
+        >
+          RESET FORM
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div
+    class="box-header with-border box box-primary"
+    style="background: white;box-shadow:none;"
+  >
+    <div class="box-header with-border">
+      <h3 class="box-title">All Enquiries</h3>
+    </div>
+    <mat-table #table [dataSource]="_dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="itItemCode">
+        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itItemCode }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="itProdCode">
+        <mat-header-cell *matHeaderCellDef> P.Code </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itProdCode }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="itItemName">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itItemName }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="itTariffCode">
+        <mat-header-cell *matHeaderCellDef>HSN</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itTariffCode }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="itRate1Day">
+        <mat-header-cell *matHeaderCellDef> 1D </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate1Day }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="itRate2Days">
+        <mat-header-cell *matHeaderCellDef> 2D </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate2Days }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate3Days">
+        <mat-header-cell *matHeaderCellDef> 3D </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate3Days }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate1Week">
+        <mat-header-cell *matHeaderCellDef> 1W </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate1Week }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate15Days">
+        <mat-header-cell *matHeaderCellDef> 15D </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate15Days }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate1Month">
+        <mat-header-cell *matHeaderCellDef> 1M </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate1Month }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate3Months">
+        <mat-header-cell *matHeaderCellDef> 3M </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate3Months }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate6Months">
+        <mat-header-cell *matHeaderCellDef> 6M </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate6Months }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate9Months">
+        <mat-header-cell *matHeaderCellDef> 9M </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate9Months }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itRate12Months">
+        <mat-header-cell *matHeaderCellDef> 12M </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.itRate12Months }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <i class="fa fa-edit edit-fa-btn" (click)="_editEnquiry(element)"></i>
+          <i
+            class="fa fa-trash delete-fa-btn"
+            (click)="_deleteEnquiry(element)"
+          ></i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+
+  <!-- <pre>{{ _items.value | json }}</pre> -->
+</section>

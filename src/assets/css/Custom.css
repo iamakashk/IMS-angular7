@@ -1,0 +1,49 @@
+.bottom-border {
+  border-bottom: 1px solid #f4f4f4;
+  color: #444;
+  display: block;
+  padding: 0px 0px 5px 10px;
+}
+
+mat-header-row {
+  min-height: 36px !important;
+}
+mat-footer-row,
+mat-header-row,
+mat-row,
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  border-bottom: 1px solid #f4f4f4 !important;
+}
+mat-header-cell {
+  border-right: 1px solid #f4f4f4 !important;
+  padding-left: 24px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: black !important;
+}
+mat-row {
+  min-height: 36px !important;
+}
+mat-cell {
+  border-right: 1px solid #f4f4f4 !important;
+  padding-left: 24px !important;
+}
+
+.delete-fa-btn {
+  color: red !important;
+  font-size: 18px !important;
+  padding: 5px !important;
+  cursor: pointer;
+}
+.edit-fa-btn {
+  color: blue !important;
+  font-size: 18px !important;
+  padding: 5px !important;
+  cursor: pointer;
+}
+
+.mr-1point5-pr {
+  margin-right: 1.5%;
+}

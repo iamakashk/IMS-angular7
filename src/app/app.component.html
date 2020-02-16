@@ -1,0 +1,8 @@
+<div class="wrapper" [ngClass]="isLoginPage ? 'login-color' : ''">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="control-sidebar-bg"></div>
+</div>

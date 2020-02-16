@@ -1,0 +1,368 @@
+<!-- <section class="content-header">
+  <h1>Customers</h1>
+  <ol class="breadcrumb">
+    <li>
+      <a routerLink="/"><i class="fa fa-dashboard"></i> Home</a>
+    </li>
+    <li><a routerLink="/">Masters</a></li>
+    <li class="active">Customers</li>
+  </ol>
+</section>
+<section class="content">
+  <div
+    class="box-header with-border box box-primary"
+    style="background: none;box-shadow:none;"
+  >
+    <mat-table #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.position }}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.weight }}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.symbol }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</section> -->
+<!-- VIEW CUSTOMER STARTS -->
+<section class="content no-min-height">
+  <div class="box-header with-border box box-primary">
+    <div class="row">
+    <form>
+      <div class="form-group col-md-3">
+        <label>Customer List</label>
+        <select class="form-control" (change)="_custChangeClickHandler($event.target.value)">
+          <option [value]="0">--SELECT CUSTOMER--</option>
+          <option *ngFor="let allCustomers of _allCustomers; let i of index"
+          [value]="allCustomers.csCustSupplrCode"
+          
+    >
+    {{allCustomers.csCustSupplrCode}}::{{allCustomers.csName | uppercase}}
+</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+          <label>&nbsp;</label>
+          <button
+          type="submit"
+          class="btn btn-primary form-control"
+          (click)="_searchCustomerClickHandler()"
+        >
+          SEARCH CUSTOMER
+        </button>
+        </div>
+    </form>
+  </div>
+  </div>
+</section>
+<section class="content">
+    
+    <div class="box-header with-border box box-primary">
+      <div class="bottom-border">
+          <h3 class="box-title"><strong>Customer Details</strong></h3>
+      </div>
+        
+      <form [formGroup]="_customerMasterForm">
+        <div class="form-group col-md-3">
+          <label>Name</label>
+          <input type="email" class="form-control" placeholder="Enter full name" 
+          [(ngModel)]="_customerDetails.csName"
+          formControlName="csName"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>PAN No.</label>
+          <input type="email" class="form-control" placeholder="Enter PAN number"
+          [(ngModel)]="_customerDetails.csPanNo"
+          formControlName="csPanNo"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Area/Location</label>
+          <select class="form-control" [(ngModel)]="_customerDetails.csAreaLocation"
+          formControlName="csAreaLocation"
+          >
+          <option *ngFor="let areaLocation of _allAreaLocation" [value]="areaLocation.id">{{areaLocation.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Source</label>
+          <select class="form-control" [(ngModel)]="_customerDetails.csSource"
+          formControlName="csSource"
+          >
+          <option *ngFor="let source of _allSources"
+          [value]="source.id" 
+            >{{source.name}}</option>
+          </select>
+        </div>
+        <div class="bottom-border">
+          <h4 class="box-title">Billing Address</h4>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 1</label>
+          <input type="email" class="form-control" placeholder="Enter address 1"
+          [(ngModel)]="_billingAddress.csadAddress1"
+          formControlName="billCsadAddress1"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 2</label>
+          <input type="email" class="form-control" placeholder="Enter address 2"
+          [(ngModel)]="_billingAddress.csadAddress2"
+          formControlName="billCsadAddress2"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 3</label>
+          <input type="email" class="form-control" placeholder="Enter address 3"
+          [(ngModel)]="_billingAddress.csadAddress3"
+          formControlName="billCsadAddress3"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 4</label>
+          <input type="email" class="form-control" placeholder="Enter address 4"
+          [(ngModel)]="_billingAddress.csadAddress4"
+          formControlName="billCsadAddress4"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>State</label>
+          <select class="form-control" 
+          [(ngModel)]="_billingAddress.csadState"
+          formControlName="billCsadState"
+          (change)="_billStateChangeListner($event.target.value)"
+          >
+            <option *ngFor="let states of _allStates"
+          [value]="states.id" 
+            >{{states.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>City</label>
+          <select class="form-control"
+          [(ngModel)]="_billingAddress.csadCity"
+          formControlName="billCsadCity"
+          >
+          <option *ngFor="let billCities of _billCities"
+          [value]="billCities.id" 
+            >{{billCities.name}}</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Pincode</label>
+          <input type="email" class="form-control" placeholder="Enter pincode"
+          [(ngModel)]="_billingAddress.csadPincode"
+          formControlName="billCsadPincode"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>GST No.</label>
+          <input type="email" class="form-control" placeholder="Enter GST number"
+          [(ngModel)]="_billingAddress.csadGstNo"
+          formControlName="billCsadGstNo"
+          />
+        </div>
+        <div class="bottom-border">
+          <h4 class="box-title">Shipping Address</h4>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 1</label>
+          <input type="email" class="form-control" placeholder="Enter address 1" 
+          [(ngModel)]="_shippingAddress.csadAddress1"
+          formControlName="shipCsadAddress1"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 2</label>
+          <input type="email" class="form-control" placeholder="Enter address 2"
+          [(ngModel)]="_shippingAddress.csadAddress2"
+          formControlName="shipCsadAddress2"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 3</label>
+          <input type="email" class="form-control" placeholder="Enter address 3" 
+          [(ngModel)]="_shippingAddress.csadAddress3"
+          formControlName="shipCsadAddress3"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label>Address 4</label>
+          <input type="email" class="form-control" placeholder="Enter address 4"
+          [(ngModel)]="_shippingAddress.csadAddress4"
+          formControlName="shipCsadAddress4"
+          />
+        </div>
+        <div class="form-group col-md-3">
+            <label>State</label>
+            <select class="form-control" 
+            [(ngModel)]="_shippingAddress.csadState"
+            formControlName="shipCsadState"
+            (change)="_shipStateChangeListner($event.target.value)"
+            >          
+            <option *ngFor="let states of _allStates"
+            [value]="states.id" 
+              >{{states.name}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label>City</label>
+            <select class="form-control" 
+            [(ngModel)]="_shippingAddress.csadCity"
+            formControlName="shipCsadCity"
+            >
+            <option *ngFor="let shipCities of _shipCities"
+            [value]="shipCities.id" 
+              >{{shipCities.name}}</option>
+            </select>
+          </div>
+        <div class="form-group col-md-3">
+          <label>Pincode</label>
+          <input type="email" class="form-control" placeholder="Enter pincode"
+          [(ngModel)]="_shippingAddress.csadPincode"
+          formControlName="shipCsadPincode"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>GST No.</label>
+          <input type="email" class="form-control" placeholder="Enter GST number"
+          [(ngModel)]="_shippingAddress.csadGstNo"
+          formControlName="shipCsadGstNo"
+          />
+        </div>
+        <div class="bottom-border">
+          <h4 class="box-title">Other Details</h4>
+        </div>
+  
+        <div class="form-group col-md-3">
+          <label>Contact Person 1</label>
+          <input type="email" class="form-control" placeholder="Enter contact person 1 name"
+          [(ngModel)]="_customerDetails.csContactPerson1"
+          formControlName="csContactPerson1"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Tel No.1</label>
+          <input type="email" class="form-control" placeholder="Enter telephone number 1"
+          [(ngModel)]="_customerDetails.csTelNo1"
+          formControlName="csTelNo1"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Contact Person 2</label>
+          <input type="email" class="form-control" placeholder="Enter contact person 2 name"
+          [(ngModel)]="_customerDetails.csContactPerson2"
+          formControlName="csContactPerson2"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Tel No.2</label>
+          <input type="email" class="form-control" placeholder="Enter telephone number 1"
+          [(ngModel)]="_customerDetails.csTelNo2"
+          formControlName="csTelNo2"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Email ID</label>
+          <input type="email" class="form-control" placeholder="Enter email"
+          [(ngModel)]="_customerDetails.csEmailId"
+          formControlName="csEmailId"
+          />
+        </div>
+  
+        <div class="form-group col-md-3">
+          <label>Landline No.</label>
+          <input type="email" class="form-control" placeholder="Enter landline number"
+          [(ngModel)]="_customerDetails.csTelNo3"
+          formControlName="csTelNo3"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Blacklisted</label>
+          <select class="form-control" 
+          [(ngModel)]="_customerDetails.csBlacklisted"
+          formControlName="csBlacklisted"
+          >
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+        </div>
+        <div class="form-group col-md-12">
+          <label>Remarks</label>
+          <input type="email" class="form-control" placeholder="Enter remarks"
+          [(ngModel)]="_customerDetails.csRemark"
+          formControlName="csRemark"
+          />
+        </div>
+      </form>
+  
+        <div class="box-footer col-md-12" style="display:flex;">
+            <div class="mr-1point5-pr">
+              <button
+                type="submit"
+                class="btn btn-primary ml-4"
+                (click)="_modifyCustomerClickHandler()"
+              >
+              <i  class="fa fa-edit "></i>
+                EDIT
+              </button>
+            </div>
+            <div class="mr-1point5-pr">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="_modifyCustomer('UPDATE')" [disabled]="_editCustomer"
+              >
+                MODIFY
+              </button>
+            </div>
+            <div class="mr-1point5-pr">
+                <button
+                  type="submit"
+                  class="btn btn-danger"
+                  (click)="_modifyCustomer('DELETE')"
+                >
+                <i class="fa fa-trash"></i>
+                  DELETE
+                </button>
+              </div>
+            <div class="mr-1point5-pr">
+              <button
+                type="submit"
+                class="btn btn-info"
+              >
+                CANCEL
+              </button>
+            </div>
+          </div>
+    </div>
+  </section>

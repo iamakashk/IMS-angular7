@@ -1,0 +1,20 @@
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AddCustomerComponent } from "./add-customer/add-customer.component";
+import { ModifyCustomerComponent } from "./modify-customer/modify-customer.component";
+import { ViewCustomerComponent } from "./view-customer/view-customer.component";
+
+const routes: Routes = [
+  {
+    path: "add",
+    component: AddCustomerComponent
+  },
+  { path: "view", component: ViewCustomerComponent },
+  { path: "modify", component: ModifyCustomerComponent }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CustomerRoutingModule {}

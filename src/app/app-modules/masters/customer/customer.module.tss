@@ -1,0 +1,30 @@
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+
+import { CustomerRoutingModule } from "./customer-routing.module";
+import { AddCustomerComponent } from "./add-customer/add-customer.component";
+import { ViewCustomerComponent } from "./view-customer/view-customer.component";
+import { ModifyCustomerComponent } from "./modify-customer/modify-customer.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { HttpClientModule } from "@angular/common/http";
+@NgModule({
+  declarations: [
+    AddCustomerComponent,
+    ViewCustomerComponent,
+    ModifyCustomerComponent
+  ],
+  imports: [
+    CommonModule,
+    CustomerRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    HttpClientModule
+  ]
+})
+export class CustomerModule {}

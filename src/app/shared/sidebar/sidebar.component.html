@@ -1,0 +1,108 @@
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img
+          src="assets/img/user2-160x160.jpg"
+          class="img-circle"
+          alt="User Image"
+        />
+      </div>
+    </div>
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="treeview">
+        <a routerLink="/">
+          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-pie-chart"></i>
+          <span>Modules</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="#" routerLink="/enquiry/new"
+              ><i class="fa fa-circle-o"></i>Enquiry</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="treeview" style="height: auto;">
+        <a href="#">
+          <i class="fa fa-share"></i> <span>Masters</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu" style="display: none;">
+          <li class="treeview" style="height: auto;">
+            <a href="#"
+              ><i class="fa fa-circle-o"></i>Customer
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li>
+                <a href="#" routerLink="/masters/customer/add"
+                  ><i class="fa fa-circle-o"></i>Add New</a
+                >
+              </li>
+              <li>
+                <a href="#" routerLink="/masters/customer/view"
+                  ><i class="fa fa-circle-o"></i>View / Modify</a
+                >
+              </li>
+              <!-- <li>
+                <a href="#" routerLink="/masters/customer/modify"
+                  ><i class="fa fa-circle-o"></i>Modify Customer</a
+                >
+              </li> -->
+              <!-- <li class="treeview">
+                <a href="#"
+                  ><i class="fa fa-circle-o"></i> Level Two
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                  <li>
+                    <a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
+                  </li>
+                </ul>
+              </li> -->
+            </ul>
+          </li>
+          <li>
+            <a href="#" routerLink="/masters/area"
+              ><i class="fa fa-circle-o"></i>Area Master</a
+            >
+          </li>
+          <li>
+            <a href="#" routerLink="/masters/source"
+              ><i class="fa fa-circle-o"></i>Source Master</a
+            >
+          </li>
+          <li>
+            <a href="#" routerLink="/masters/item-master"
+              ><i class="fa fa-circle-o"></i>Item Master</a
+            >
+          </li>
+          <!-- <li>
+            <a href="#"><i class="fa fa-circle-o"></i> Level One</a>
+          </li> -->
+        </ul>
+      </li>
+    </ul>
+  </section>
+</aside>

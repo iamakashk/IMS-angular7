@@ -1,0 +1,11 @@
+table.mat-table {
+  border-spacing: 0;
+  width: 100%;
+}
+.no-min-height {
+  min-height: 0;
+  padding-bottom: 0;
+}
+.box {
+  margin-bottom: 0 !important;
+}

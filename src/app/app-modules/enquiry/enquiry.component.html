@@ -1,0 +1,265 @@
+<section class="content">
+  <div class="box-header with-border box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Enquiry Master</h3>
+    </div>
+    <form [formGroup]="_enquiryForm">
+      <div class="form-group col-md-6">
+        <label>Source</label>
+        <select
+          class="form-control"
+          formControlName="source"
+          [(ngModel)]="_enquiryMaster.source"
+        >
+          <option *ngFor="let source of _allSources" [value]="source.id">{{
+            source.name
+          }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Area</label>
+        <select
+          class="form-control"
+          formControlName="area"
+          [(ngModel)]="_enquiryMaster.area"
+        >
+          <option *ngFor="let area of _allAreaLocations" [value]="area.id">{{
+            area.name
+          }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Date</label>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Date"
+          formControlName="enquiryDetailTsCreated"
+          [(ngModel)]="_enquiryDetails.enquiryDetailTsCreated"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Customer Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          formControlName="custName"
+          [(ngModel)]="_enquiryMaster.custName"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Customer Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="custEmail"
+          [(ngModel)]="_enquiryMaster.custEmail"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Contact Person</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Contact Person"
+          formControlName="contactPerson"
+          [(ngModel)]="_enquiryMaster.contactPerson"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Telephone 1</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Telephone 1"
+          formControlName="tel1"
+          [(ngModel)]="_enquiryMaster.tel1"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Telephone 2</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Telephone 2"
+          formControlName="tel2"
+          [(ngModel)]="_enquiryMaster.tel2"
+        />
+      </div>
+      <div class="form-group col-md-12">
+        <label>Remarks</label>
+        <textarea
+          class="form-control"
+          placeholder="Remarks"
+          formControlName="remarks"
+          [(ngModel)]="_enquiryMaster.remarks"
+        ></textarea>
+      </div>
+
+      <div
+        class="root-div"
+        *ngFor="
+          let item of _enquiryForm.get('itemRows')?.controls;
+          let index = index
+        "
+        [hidden]="_enquiryDetails[index].deletedFlag=='Y'"
+      >
+        <div class="form-group col-md-3" >
+          <label>Item</label>
+          <select
+            class="form-control"
+            [formControl]="item.get('enquiryItemCode')"
+            [(ngModel)]="_enquiryDetails[index].enquiryItemCode"
+            
+          >
+            <option *ngFor="let item of _allItems" [ngValue]="item.itItemCode"
+              >{{ item.itItemCode }}-{{ item.itItemName }}</option
+            >
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Period</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Period"
+            [formControl]="item.get('itemPeriod')"
+            [(ngModel)]="_enquiryDetails[index].itemPeriod"
+          />
+        </div>
+        <div class="form-group col-md-2">
+          <label>Qty</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Qty"
+            [formControl]="item.get('itemQty')"
+            [(ngModel)]="_enquiryDetails[index].itemQty"
+          />
+        </div>
+        <div class="form-group col-md-2">
+          <label>Rate</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Rate"
+            [formControl]="item.get('itemRate')"
+            [(ngModel)]="_enquiryDetails[index].itemRate"
+          />
+        </div>
+        <div class="form-group col-md-1">
+          <div>
+            <button class="btn btn-block btn-default" (click)="_addItemRow()">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+            <button
+              class="btn btn-block btn-default"
+              (click)="_removeItemRow(index)"
+            >
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="box-footer col-md-12" style="display:flex;">
+      <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-primary ml-4"
+          (click)="_addEnquiryClickHandler('ADD')"
+          [disabled]="!_isAddEnquiryClicked"
+        >
+          ADD SOURCE
+        </button>
+      </div>
+      <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="_addEnquiryClickHandler('UPDATE')"
+          [disabled]="!_isModifiedClicked"
+        >
+          MODIFY
+        </button>
+      </div>
+      <div class="mr-1point5-pr">
+        <button
+          type="submit"
+          class="btn btn-info"
+          (click)="_resetFormClickHandler()"
+        >
+          RESET
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div
+    class="box-header with-border box box-primary"
+    style="background: white;box-shadow:none;"
+  >
+    <div class="box-header with-border">
+      <h3 class="box-title">All Enquiries</h3>
+    </div>
+    <mat-table #table [dataSource]="_dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="enquiryId">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.enquiryId }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="custName">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.custName }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="custEmail">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.custEmail }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="contactPerson">
+        <mat-header-cell *matHeaderCellDef> Contact Person </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.contactPerson }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="tel1">
+        <mat-header-cell *matHeaderCellDef> Phone No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.tel1 }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <i class="fa fa-edit edit-fa-btn" (click)="_editEnquiry(element)"></i>
+          <i
+            class="fa fa-trash delete-fa-btn"
+            (click)="_deleteEnquiry(element)"
+          ></i>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+
+  <pre>{{ _items.value | json }}</pre>
+</section>
