@@ -15,6 +15,7 @@ import { AreaMasterComponent } from "./area-master/area-master.component";
 import { SourceMasterComponent } from "./source-master/source-master.component";
 import { EnquiryMasterComponent } from './enquiry-master/enquiry-master.component';
 import { ItemmasterComponent } from './itemmaster/itemmaster.component';
+import { QuotationComponent } from './quotation/quotation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ItemmasterComponent } from './itemmaster/itemmaster.component';
     AreaMasterComponent,
     SourceMasterComponent,
     EnquiryMasterComponent,
-    ItemmasterComponent
+    ItemmasterComponent,
+    QuotationComponent
   ],
   imports: [
     CommonModule,

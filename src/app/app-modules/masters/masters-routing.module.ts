@@ -8,6 +8,7 @@ import { ViewCustomerComponent } from "./customer/view-customer/view-customer.co
 
 import { AreaMasterComponent } from "./area-master/area-master.component";
 import { SourceMasterComponent } from "./source-master/source-master.component";
+import { QuotationComponent } from "./quotation/quotation.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: "item-master",
     component: ItemmasterComponent
+  },
+
+  {
+    path: "quote-master",
+    component: QuotationComponent
   }
 ];
 
